@@ -1,0 +1,14 @@
+0000000000000000000000000000000000000000 7ed750fc652aa74978417699572531f820172693 Zhengquan, Yang <yangzhengquan@gmail.com> 1419759603 +0800	initial pull
+7ed750fc652aa74978417699572531f820172693 239ed3fb93eff62a4605d906bcd078eb47367c87 Zhengquan, Yang <yangzhengquan@gmail.com> 1419776771 +0800	commit: should get shopping list for single item
+239ed3fb93eff62a4605d906bcd078eb47367c87 23124402999c5c666a3c369533014e0c44e94cac Zhengquan, Yang <yangzhengquan@gmail.com> 1419778684 +0800	commit: get correct shopping list fot two items with same type
+23124402999c5c666a3c369533014e0c44e94cac 84ece538dac84c2eb2a9b76e8a313a6abe51b0fb Zhengquan, Yang <yangzhengquan@gmail.com> 1419781832 +0800	commit: add ant script
+84ece538dac84c2eb2a9b76e8a313a6abe51b0fb 35c61ae13a6f556d171b89a22bd1adfbe54f2f48 Zhengquan, Yang <yangzhengquan@gmail.com> 1419956263 +0800	commit: multiple items with multiple type
+35c61ae13a6f556d171b89a22bd1adfbe54f2f48 a31181684814b95335c58293925c498e67b31f55 Zhengquan, Yang <yangzhengquan@gmail.com> 1419957272 +0800	commit: should be two item when items has same name
+a31181684814b95335c58293925c498e67b31f55 093dba7280f08eb87f18a0e7fff775cbcc3ce73a Zhengquan, Yang <yangzhengquan@gmail.com> 1419958058 +0800	commit: should throw exception when has no items in shopping cart
+093dba7280f08eb87f18a0e7fff775cbcc3ce73a 8f920d1aa010fae87cf21e7a165d52d042a6bf4d Zhengquan, Yang <yangzhengquan@gmail.com> 1419960111 +0800	commit: support discount
+8f920d1aa010fae87cf21e7a165d52d042a6bf4d 0e95c994824400a0271848242f5a7e6bed5af226 Zhengquan, Yang <yangzhengquan@gmail.com> 1419967835 +0800	commit: refactoring: SRP
+0e95c994824400a0271848242f5a7e6bed5af226 a86659d43171f923cb67a657fdbf1e909a6bb386 Zhengquan, Yang <yangzhengquan@gmail.com> 1420192172 +0800	commit: add input parser
+a86659d43171f923cb67a657fdbf1e909a6bb386 7d8b50e37fd27f4a701026fa5cc1564ba636eb5d Zhengquan, Yang <yangzhengquan@gmail.com> 1420195797 +0800	commit: change package name
+7d8b50e37fd27f4a701026fa5cc1564ba636eb5d d737b4bdd67a2601f86f23ff6d2ff16674b2deac Zhengquan, Yang <yangzhengquan@gmail.com> 1420196651 +0800	commit: fix discount error
+d737b4bdd67a2601f86f23ff6d2ff16674b2deac 544abd59fd53082b7fe5c6525c052e27e466fc52 Zhengquan, Yang <yangzhengquan@gmail.com> 1420291658 +0800	commit: close method and renmae variable
+544abd59fd53082b7fe5c6525c052e27e466fc52 f5e28651557caf54f133f5952b20b119173cbc22 Zhengquan, Yang <yangzhengquan@gmail.com> 1420477507 +0800	commit: change to two files
