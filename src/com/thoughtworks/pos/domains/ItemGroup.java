@@ -3,74 +3,42 @@ package com.thoughtworks.pos.domains;
 import java.util.List;
 
 /**
- * Created by 5Wenbin 2016.6.22
+ * Created by Administrator on 2014/12/31.
  */
 public class ItemGroup {
-    private Item item;
-    private int quanitty;
-    private int gift;
-    private User user = new User();
+    private List<Item> items;
 
-    public void setUser(User user){
-        this.user = user;
+    public ItemGroup(List<Item> items) {
+        this.items = items;
     }
 
-    public User getUser(){
-        return user;
-    }
-
-    public ItemGroup(Item item) {
-        this.item = item;
-        this.quanitty = 0;
-        this.gift = 0;
-    }
-    
     public String groupName() {
-        return item.getName();
+        return items.get(0).getName();
     }
 
     public int groupSize() {
-        return quanitty;
+        return items.size();
     }
 
     public String groupUnit() {
-        return item.getUnit();
+        return items.get(0).getUnit();
     }
 
-    public double groupPrice() { return item.getPrice(); }
-
-    public boolean groupPromotion(){ return item.getPromotion(); }
-
-    public int groupGift(){ return gift; }
-
-    public void addOne(){
-        quanitty++;
-        if(item.getPromotion()&&quanitty>1){
-            gift = 1;
-        }
+    public double groupPrice() {
+        return items.get(0).getPrice();
     }
 
     public double subTotal() {
-        if (item.getPromotion() && quanitty > 1) {
-            return item.getPrice() * quanitty;
-        }
-        double result;
-        result = item.getPrice() * quanitty * item.getDiscount();
-        if(user.getIsVIP()){
-            result *= item.getVipDiscount();
-        }
+        double result = 0.00;
+        for (Item item : items)
+            result += item.getPrice() * item.getDiscount();
         return result;
     }
 
     public double saving() {
-        if(item.getPromotion()&&quanitty>1) {
-            return item.getPrice();
-        }
-        double result;
-        result = item.getPrice() * quanitty * (1 - item.getDiscount());
-        if(user.getIsVIP()){
-            result += item.getPrice() * quanitty * item.getDiscount() * (1-item.getVipDiscount());
-        }
+        double result = 0.00;
+        for (Item item : items)
+            result += item.getPrice() * (1 - item.getDiscount());
         return result;
     }
 }
