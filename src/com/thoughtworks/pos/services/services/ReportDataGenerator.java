@@ -1,10 +1,7 @@
 package com.thoughtworks.pos.services.services;
 
-import com.thoughtworks.pos.common.EmptyShoppingCartException;
-import com.thoughtworks.pos.domains.Item;
-import com.thoughtworks.pos.domains.ItemGroup;
-import com.thoughtworks.pos.domains.Report;
-import com.thoughtworks.pos.domains.ShoppingChart;
+import com.thoughtworks.pos.common.EmptyShoppingChartException;
+import com.thoughtworks.pos.domains.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -21,31 +18,44 @@ public class ReportDataGenerator {
         this.shoppingChart = shoppingChart;
     }
 
-    public Report generate() throws EmptyShoppingCartException {
+    public Report generate() throws EmptyShoppingChartException {
         ArrayList<Item> items = shoppingChart.getItems();
         if (items.size() <= 0) {
-            throw new EmptyShoppingCartException();
+            throw new EmptyShoppingChartException();
         }
 
         List<ItemGroup> itemGroups = GetItemGroups(items);
-        return new Report(itemGroups);
+        Report report = new Report(itemGroups);
+
+        if(shoppingChart.getUser().getUserCode()!=null && shoppingChart.getUser().getIsVIP()) { // 判断现有积分情况，决定消费金额和积分的比率
+            if (shoppingChart.getUser().getScore() >= 0 && shoppingChart.getUser().getScore() <= 200) {
+                report.setScoreType(1);
+            } else if (shoppingChart.getUser().getScore() > 200 && shoppingChart.getUser().getScore() <= 500) {
+                report.setScoreType(3);
+            } else if (shoppingChart.getUser().getScore() > 500) {
+                report.setScoreType(5);
+            }
+        }
+        shoppingChart.getUser().addScore(report.getScore()); // 增加积分
+        return report;
     }
 
     private List<ItemGroup> GetItemGroups(ArrayList<Item> items) {
         List<ItemGroup> itemGroupies = new LinkedList<ItemGroup>();
-        for (List<Item> group : groupByItemBarCode(items).values())
-            itemGroupies.add(new ItemGroup(group));
+        for (ItemGroup group: groupByItemBarCode(items).values())
+            itemGroupies.add(group);
         return itemGroupies;
     }
 
-    private static LinkedHashMap<String, List<Item>> groupByItemBarCode(ArrayList<Item> items) {
-        LinkedHashMap<String, List<Item>> map = new LinkedHashMap<String, List<Item>>();
+    private LinkedHashMap<String, ItemGroup> groupByItemBarCode(ArrayList<Item> items) {
+        LinkedHashMap<String, ItemGroup> map = new LinkedHashMap<String, ItemGroup>();
         for (Item item : items) {
             String itemBarCode = item.getBarcode();
             if (!map.containsKey(itemBarCode)) {
-                map.put(itemBarCode, new ArrayList<Item>());
+                map.put(itemBarCode, new ItemGroup(item));
+                map.get(itemBarCode).setUser(shoppingChart.getUser());
             }
-            map.get(itemBarCode).add(item);
+            map.get(itemBarCode).addOne();
         }
         return map;
     }
