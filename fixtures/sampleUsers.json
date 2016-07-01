@@ -1,0 +1,18 @@
+{
+  "USER0001": {
+    "userCode":"USER0001",
+    "name": "卢嘉希",
+    "isVIP": true,
+    "score":550
+  },
+  "USER0002": {
+    "userCode":"USER0002",
+    "name": "秦雷",
+    "isVIP": false
+  },
+  "USER0003": {
+    "userCode":"USER0003",
+    "name": "赵坤豪",
+    "isVIP": true
+  }
+}
