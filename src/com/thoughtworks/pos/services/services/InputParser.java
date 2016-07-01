@@ -35,19 +35,19 @@ public class InputParser {
         ShoppingChart shoppingChart = new ShoppingChart();
         for (String barcode : barCodes) {
             Item mappedItem = itemIndexes.get(barcode);
-            Item item = new Item(barcode, mappedItem.getName(), mappedItem.getUnit(), mappedItem.getPrice(), mappedItem.getDiscount());
+            Item item = new Item(mappedItem.getVipDiscount(), barcode, mappedItem.getName(), mappedItem.getUnit(), mappedItem.getPrice(), mappedItem.getDiscount(), mappedItem.getPromotion());
             shoppingChart.add(item);
         }
         return shoppingChart;
     }
 
     private String[] getBoughtItemBarCodes() throws IOException {
-        String itemsStr = FileUtils.readFileToString(itemsFile);
+        String itemsStr = FileUtils.readFileToString(indexFile);
         return objectMapper.readValue(itemsStr, String[].class);
     }
 
     private HashMap<String, Item> getItemIndexes() throws IOException {
-        String itemsIndexStr = FileUtils.readFileToString(indexFile);
+        String itemsIndexStr = FileUtils.readFileToString(itemsFile);
         TypeReference<HashMap<String,Item>> typeRef = new TypeReference<HashMap<String,Item>>() {};
         return objectMapper.readValue(itemsIndexStr, typeRef);
     }

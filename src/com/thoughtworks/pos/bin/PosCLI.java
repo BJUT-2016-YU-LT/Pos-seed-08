@@ -1,23 +1,35 @@
 package com.thoughtworks.pos.bin;
 
-import com.thoughtworks.pos.common.EmptyShoppingCartException;
+import com.thoughtworks.pos.common.BarCodeNotExistException;
+import com.thoughtworks.pos.common.BarCodeReuseException;
+import com.thoughtworks.pos.common.EmptyShoppingChartException;
 import com.thoughtworks.pos.domains.Pos;
 import com.thoughtworks.pos.domains.ShoppingChart;
-import com.thoughtworks.pos.services.services.InputParser;
+import com.thoughtworks.pos.services.services.ListInputParser;
 
 import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Administrator on 2015/1/2.
+ * Created by Administrator 2016.6.27
  */
+
 public class PosCLI {
-    public static void main (String args[]) throws IOException, EmptyShoppingCartException {
-        InputParser inputParser = new InputParser(new File(args[0]), new File(args[1]));
+    public static void main (String args[]) throws IOException, EmptyShoppingChartException, BarCodeReuseException, BarCodeNotExistException {
+        File items = new File("C:\\Users\\Administrator\\Desktop\\target\\fixtures\\sampleItems.json");
+        File users = new File("C:\\Users\\Administrator\\Desktop\\target\\fixtures\\sampleUsers.json");
+        File userShoppingList = new File("C:\\Users\\Administrator\\Desktop\\target\\fixtures\\newSampleIndexes.json");
+
+        //InputParser inputParser = new InputParser(barCodes, items);
+        ListInputParser inputParser = new ListInputParser(userShoppingList, items, users);
+
         ShoppingChart shoppingChart = inputParser.parser();
 
         Pos pos = new Pos();
         String shoppingList = pos.getShoppingList(shoppingChart);
+
+        System.out.println(inputParser.saveFile(shoppingChart));
+
         System.out.print(shoppingList);
     }
 }
